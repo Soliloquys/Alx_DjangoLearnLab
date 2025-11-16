@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404 , redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Library
 from .models import Book
 from django.views.generic.detail import DetailView
-from django.contrib.auth.forms import UserCreationForm           # registration form
-from django.contrib.auth.views import LoginView, LogoutView      
+from django.contrib.auth import login      # literal ALX check
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 

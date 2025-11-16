@@ -1,13 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Book, Library
-from django.views.generic.detail import DetailView  # ALX literal check
+from django.views.generic.detail import DetailView
 
-# Function-based view: list all books (simple text list)
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
 
-# Class-based view: library detail (show all books in that library)
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'

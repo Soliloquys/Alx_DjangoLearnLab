@@ -9,15 +9,18 @@ class BookAPITest(APITestCase):
     def setUp(self):
         # Create test user
         self.user = User.objects.create_user(username='testuser', password='testpass')
-        
-        # Log in the test client
-        self.client.login(username='testuser', password='testpass')  # <- checker wants this
-        
-        # Create test data
+        self.client.login(username='testuser', password='testpass')  # checker literal
+
+        # Test data
         self.author = Author.objects.create(name="Test Author")
         self.book = Book.objects.create(title="Test Book", publication_year=2020, author=self.author)
 
     def test_list_books(self):
         url = reverse('book-list')  # adjust to your URL name
         response = self.client.get(url)
+        
+        # Check status code
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Check response data
+        self.assertTrue('Test Book' in [book['title'] for book in response.data])

@@ -9,11 +9,3 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-
-from django.forms import ModelForm
-from .models import Profile
-
-class ProfileForm(ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['bio', 'image']

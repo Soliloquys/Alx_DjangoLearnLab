@@ -12,7 +12,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('profile')
     else:
         form = UserRegisterForm()
     return render(request, 'blog/register.html', {'form': form})
@@ -23,6 +23,7 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     template_name = 'blog/logout.html'
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         form = UserChangeForm(request.POST, instance=request.user)
@@ -31,5 +32,5 @@ def profile(request):
             return redirect('profile')
     else:
         form = UserChangeForm(instance=request.user)
-        
+
     return render(request, 'blog/profile.html', {'form': form})
